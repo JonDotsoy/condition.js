@@ -1,0 +1,32 @@
+.input {
+  @apply border border-gray-300 px-2 py-1 rounded;
+}
+
+.inputWithType {
+  @apply
+    grid
+    grid-cols-[auto_1fr]
+  ;
+
+  select, input {
+    @apply
+      border-y
+      border-gray-300
+      px-2
+      py-1
+    ;
+  }
+  
+  select {
+    @apply
+      border-l
+      rounded-l
+    ;
+  }
+  input {
+    @apply
+      border-r
+      rounded-r
+    ;
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@jondotsoy/condition",
+  "version": "0.1.0",
+  "description": "",
+  "type": "module",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./lib/esm/*.d.ts"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/esm/condition.js",
+      "default": "./lib/esm/condition.js",
+      "types": "./lib/esm/condition.d.ts"
+    }
+  },
+  "scripts": {
+    "lint": "prettier -c .",
+    "fmt": "prettier -w ."
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.6.3",
+    "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "@jondotsoy/utils-js": "^0.5.2",
+    "nanostores": "^0.11.3"
+  }
+}

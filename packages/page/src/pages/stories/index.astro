@@ -1,0 +1,42 @@
+---
+import { symbol } from "astro:schema";
+import Layout from "../../layouts/Layout.astro";
+import { get } from "@jondotsoy/utils-js";
+import { basename } from "path";
+
+const storiesFiles = await Astro.glob("../../**/*.story.astro");
+
+const stories = storiesFiles
+    .map((story) => {
+        const storyData = get.record(story, "story");
+        const title = get.string(storyData, "title");
+
+        if (!title) return null;
+
+        return {
+            id: story.file.replace(/\W/g, "_"),
+            title,
+        };
+    })
+    .filter((e) => e !== null);
+---
+
+<Layout title="Stories">
+    <main class="max-w-screen-lg m-auto">
+        <h1>Stories ({stories.length})</h1>
+        <ul>
+            {
+                stories.map((story) => (
+                    <li>
+                        <a
+                            href={`/stories/story/${story.id}`}
+                            class="text-blue-400"
+                        >
+                            {story.title}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </main>
+</Layout>

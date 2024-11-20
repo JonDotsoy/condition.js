@@ -1,0 +1,47 @@
+.selected {
+    @apply
+        text-xs
+        border
+        rounded-t
+        px-2
+    ;
+
+    &[x-selected="yaml"] > [data-value="yaml"],
+    &[x-selected="json"] > [data-value="json"]
+    {
+        @apply
+            rounded-t
+            border-blue-300
+            text-blue-400
+        ;
+    }
+
+    button {
+        @apply
+            px-2
+            py-1
+            border-b-2
+            border-transparent
+            transition-all
+            text-black/40
+    }
+}
+
+.payload {
+    @apply
+        p-4
+        bg-gray-200
+        rounded-b
+        border-b
+        border-x
+        border-gray-300
+        text-gray-500
+        font-mono
+    ;
+
+    :global(.hljs-attr) { @apply text-blue-600; }
+    :global(.hljs-punctuation) { @apply text-orange-400; }
+    :global(.hljs-string) { @apply text-cyan-600; }
+    
+}
+

@@ -1,0 +1,56 @@
+---
+import { DisplayUseConditionWithTs } from "../components/display-use-condition-with-ts/display-use-condition-with-ts";
+import { GlobalJSONConditionEditor } from "../components/condition-editor";
+import { PayloadDataRender } from "../components/payload-data-render/payload-data-render";
+import Layout from "../layouts/Layout.astro";
+import { PayloadSection } from "../sections/json-output-form";
+import { UserOutput } from "../sections/user-output";
+import { CodeImplementation } from "../sections/code-implementation";
+import { UserDataList } from "../sections/user-data-list";
+---
+
+<style>
+	.display-comps {
+		@apply
+			grid
+			max-w-screen-lg
+			m-auto
+			gap-4
+		;
+
+		grid-template: 
+			'form output' auto
+			'usage-module usage-module' auto
+			'code-usage code-usage' auto
+			/ 2fr 1fr; 
+		;
+	}
+
+	[x-section-name="form"] { grid-area: form; }
+	[x-section-name="output"] { grid-area: output; }
+	[x-section-name="usage-module"] { grid-area: usage-module; }
+	[x-section-name="code-usage"] { grid-area: code-usage; }
+</style>
+
+<Layout title="Conditions for JSON">
+	<main class="py-8">
+		<div class="display-comps">
+			<section x-section-name="form">
+				<GlobalJSONConditionEditor client:load />
+			</section>
+			<section x-section-name="output">
+				<h2>Conditions:</h2>
+				<PayloadSection client:only />
+			</section>
+			<section x-section-name="usage-module">
+				<h2>Data:</h2>
+				<UserOutput client:only></UserOutput>
+			</section>
+			<section x-section-name="code-usage">
+				<h2>Sample:</h2>
+				<CodeImplementation client:only></CodeImplementation>
+			</section>
+		</div>
+	</main>
+	<UserDataList client:only></UserDataList>
+</Layout>

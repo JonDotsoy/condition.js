@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "target": "es2020",
+    "declaration": true,
+    "allowImportingTsExtensions": false
+  },
+  "exclude": ["lib", "node_modules", "**/*.spec.ts"]
+}

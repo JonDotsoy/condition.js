@@ -1,0 +1,31 @@
+{
+  "name": "page",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/react": "^3.6.2",
+    "@astrojs/tailwind": "^5.1.2",
+    "@jondotsoy/condition": "../../jondotsoy-condition-0.1.0.tgz",
+    "@jondotsoy/splitg": "^0.6.0",
+    "@types/flat": "^5.0.5",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "astro": "^4.16.13",
+    "classnames": "^2.5.1",
+    "flat": "",
+    "highlight.js": "^11.10.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3",
+    "yaml": "^2.6.1"
+  }
+}
