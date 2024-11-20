@@ -13,7 +13,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/react": "^3.6.2",
     "@astrojs/tailwind": "^5.1.2",
-    "@jondotsoy/condition": "../../jondotsoy-condition-0.1.0.tgz",
+    "@jondotsoy/condition": "^0.1.0",
     "@jondotsoy/splitg": "^0.6.0",
     "@types/flat": "^5.0.5",
     "@types/react": "^18.3.12",
