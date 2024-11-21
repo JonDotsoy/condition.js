@@ -1,47 +1,52 @@
 .selected {
-    @apply
-        text-xs
+  @apply text-xs
         border
         rounded-t
-        px-2
-    ;
+        px-2;
 
-    &[x-selected="yaml"] > [data-value="yaml"],
-    &[x-selected="json"] > [data-value="json"]
-    {
-        @apply
-            rounded-t
+  &[x-selected="yaml"] > [data-value="yaml"],
+  &[x-selected="json"] > [data-value="json"] {
+    @apply rounded-t
             border-blue-300
-            text-blue-400
-        ;
-    }
+            text-blue-400;
+  }
 
-    button {
-        @apply
-            px-2
+  button {
+    @apply px-2
             py-1
             border-b-2
             border-transparent
             transition-all
-            text-black/40
-    }
+            text-black/40;
+  }
 }
 
 .payload {
-    @apply
-        p-4
+  @apply p-4
         bg-gray-200
         rounded-b
         border-b
         border-x
         border-gray-300
         text-gray-500
-        font-mono
-    ;
+        font-mono;
 
-    :global(.hljs-attr) { @apply text-blue-600; }
-    :global(.hljs-punctuation) { @apply text-orange-400; }
-    :global(.hljs-string) { @apply text-cyan-600; }
-    
+  :global(.hljs-attr) {
+    @apply text-blue-600;
+  }
+  :global(.hljs-punctuation) {
+    @apply text-orange-400;
+  }
+  :global(.hljs-string) {
+    @apply text-cyan-600;
+  }
+  :global(.hljs-keyword) {
+    @apply text-purple-600;
+  }
+  :global(.hljs-title) {
+    @apply text-blue-600;
+  }
+  :global(.hljs-comment) {
+    @apply text-gray-400;
+  }
 }
-

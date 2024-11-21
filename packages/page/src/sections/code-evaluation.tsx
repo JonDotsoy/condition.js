@@ -1,3 +1,3 @@
 export const CodeEvaluation = () => {
-    return <></>
-}
+  return <></>;
+};

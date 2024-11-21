@@ -1,6 +1,8 @@
-.PHONY: fmt lint clean
+.PHONY: fmt lint clean page/dev build
 
-all: lib
+all: build
+
+build: lib
 
 fmt:
 	bun run fmt
@@ -8,11 +10,13 @@ fmt:
 lint:
 	bun run lint
 
-clean:
-	rm -rf lib
+clean: lib/*
 
 lib:
-	bunk tsc --project tsconfig.esm.json --outDir lib/esm
+	bunx tsc --project tsconfig.esm.json --outDir lib/esm
 
-demo-page:
+page/dev:
 	cd packages/page && bun dev
+
+lib/%:
+	rm -rf $^

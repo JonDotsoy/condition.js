@@ -13,7 +13,7 @@ import { UserDataList } from "../sections/user-data-list";
 	.display-comps {
 		@apply
 			grid
-			max-w-screen-lg
+			container
 			m-auto
 			gap-4
 		;
@@ -36,6 +36,7 @@ import { UserDataList } from "../sections/user-data-list";
 	<main class="py-8">
 		<div class="display-comps">
 			<section x-section-name="form">
+				<h2>Form:</h2>
 				<GlobalJSONConditionEditor client:load />
 			</section>
 			<section x-section-name="output">
@@ -51,6 +52,9 @@ import { UserDataList } from "../sections/user-data-list";
 				<CodeImplementation client:only></CodeImplementation>
 			</section>
 		</div>
+		<UserDataList client:only></UserDataList>
 	</main>
-	<UserDataList client:only></UserDataList>
+	<footer class="container m-auto">
+		<p class="text-black/70">Created with Astro. Source code available at <a href="https://github.com/JonDotsoy/condition.js">https://github.com/JonDotsoy/condition.js</a></p>
+	</footer>
 </Layout>

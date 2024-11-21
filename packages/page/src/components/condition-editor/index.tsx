@@ -1,17 +1,23 @@
 import classNames from "classnames";
 import style from "./style.module.css";
-import { useCallback, useEffect, useId, useState, useSyncExternalStore, useTransition, type FC } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useState,
+  useSyncExternalStore,
+  useTransition,
+  type FC,
+} from "react";
 import { globalCondition } from "../../stores/global_condition";
+import { type ConditionDTO } from "@jondotsoy/condition";
 
 type Update = (operation: string, values: any) => any;
 type UpdateList = (values: any) => any;
 
+const defaultUpdate: Update = (operation, values) => {};
 
-const defaultUpdate: Update = (operation, values) => {
-};
-
-const defaultUpdateList: UpdateList = (values) => {
-};
+const defaultUpdateList: UpdateList = (values) => {};
 
 const optionSelectedList: Record<string, string> = {
   equal: "=",
@@ -24,20 +30,25 @@ const optionSelectedList: Record<string, string> = {
   not: "not",
 };
 
-const ListJSONConditionEditor: FC<{ depth?: number, update?: UpdateList }> = ({ depth = 0, update = defaultUpdateList }) => {
-  type A = { id: string, operation?: string, values?: any };
+const ListJSONConditionEditor: FC<{ depth?: number; update?: UpdateList }> = ({
+  depth = 0,
+  update = defaultUpdateList,
+}) => {
+  type A = { id: string; operation?: string; values?: any };
 
   const [list, setList] = useState<A[]>([
     // { id: crypto.randomUUID() },
   ]);
 
   useEffect(() => {
-    update(list.map(e => {
-      if (!e.operation) return []
-      return {
-        [e.operation]: e.values
-      }
-    }));
+    update(
+      list.map((e) => {
+        if (!e.operation) return [];
+        return {
+          [e.operation]: e.values,
+        };
+      }),
+    );
   }, [list]);
 
   const add = () => setList((list) => [...list, { id: crypto.randomUUID() }]);
@@ -58,13 +69,13 @@ const ListJSONConditionEditor: FC<{ depth?: number, update?: UpdateList }> = ({ 
                 depth={depth}
                 update={(operation, values) => {
                   setList((list) => {
-                    return list.map(subItem => {
+                    return list.map((subItem) => {
                       if (subItem.id === item.id) {
-                        return { ...subItem, operation, values }
+                        return { ...subItem, operation, values };
                       }
-                      return subItem
-                    })
-                  })
+                      return subItem;
+                    });
+                  });
                 }}
               ></JSONConditionEditor>
               <div>
@@ -93,46 +104,51 @@ const ListJSONConditionEditor: FC<{ depth?: number, update?: UpdateList }> = ({ 
   );
 };
 
-
 const InputWithType: FC<{
-  placeholder?: string,
-  onChange?: (value: any) => void
+  placeholder?: string;
+  onChange?: (value: any) => void;
 }> = ({ placeholder, onChange }) => {
-  const [type, setType] = useState('text');
-  const [memoryValue, setMemoryValue] = useState('');
-
+  const [type, setType] = useState("text");
+  const [memoryValue, setMemoryValue] = useState("");
 
   const setValue = (type: string, value: string) => {
     setType(type);
     setMemoryValue(value);
 
-    onChange?.(type === 'number' ? Number(value) : value);
-  }
+    onChange?.(type === "number" ? Number(value) : value);
+  };
 
+  return (
+    <div className={style.inputWithType}>
+      <select
+        onChange={(e) => {
+          e.preventDefault();
+          setValue(e.target.value, memoryValue);
+        }}
+        defaultValue={type}
+      >
+        <option value="text">text</option>
+        <option value="number">number</option>
+      </select>
+      <input
+        type={type}
+        placeholder={placeholder}
+        onChange={(e) => {
+          setValue(type, e.target.value);
+        }}
+      />
+    </div>
+  );
+};
 
-  return <div className={style.inputWithType}>
-    <select onChange={e => { e.preventDefault(); setValue(e.target.value, memoryValue) }}
-      defaultValue={type}
-    >
-      <option value="text">text</option>
-      <option value="number">number</option>
-    </select>
-    <input
-      type={type}
-      placeholder={placeholder}
-      onChange={(e) => { setValue(type, e.target.value) }}
-    />
-  </div>
-}
-
-
-export const JSONConditionEditor: FC<{ depth?: number; update?: Update }> = ({
-  depth = 0,
-  update = defaultUpdate,
-}) => {
+export const JSONConditionEditor: FC<{
+  depth?: number;
+  update?: Update;
+  initialValue?: ConditionDTO;
+}> = ({ depth = 0, update = defaultUpdate, initialValue = {} }) => {
   const formId = useId();
   const [optionSelected, setOptionSelected] = useState("equal");
-  const [conditionValue, setConditionValue] = useState<any>(["",""]);
+  const [conditionValue, setConditionValue] = useState<any>(["", ""]);
 
   const useMultiChoice = ["and", "or", "not"].includes(optionSelected);
 
@@ -147,11 +163,15 @@ export const JSONConditionEditor: FC<{ depth?: number; update?: Update }> = ({
     update(optionSelected, conditionValue);
   }, [optionSelected, conditionValue]);
 
-  const changeS = useCallback((value: string) => {
-    setOptionSelected(value);
-    const useMultiChoice = ["and", "or", "not"].includes(value);
-    if (!useMultiChoice) setConditionValue(["",""])
-  }, [useMultiChoice, conditionValue]);
+  const changeS = useCallback(
+    (value: string) => {
+      setOptionSelected(value);
+      const useMultiChoice = ["and", "or", "not"].includes(value);
+      if (!useMultiChoice && !Array.from(conditionValue))
+        setConditionValue(["", ""]);
+    },
+    [conditionValue],
+  );
 
   const setField = (name: string) => {
     setConditionValue((v: any) => {
@@ -252,12 +272,25 @@ export const JSONConditionEditor: FC<{ depth?: number; update?: Update }> = ({
   );
 };
 
-
 export const GlobalJSONConditionEditor = () => {
-  return <>
-    <JSONConditionEditor
-      depth={0}
-      update={(operation, values) => globalCondition.set({ [operation]: values })}
-    ></JSONConditionEditor>
-  </>
-}
+  return (
+    <>
+      <JSONConditionEditor
+        depth={0}
+        update={(operation, values) =>
+          globalCondition.set({ [operation]: values })
+        }
+        initialValue={{
+          and: [
+            {
+              greaterThanOrEqual: ["user.age", 20],
+            },
+            {
+              lessThan: ["user.age", 40],
+            },
+          ],
+        }}
+      ></JSONConditionEditor>
+    </>
+  );
+};

@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Condition",
+  "description": "Schema for the condition object",
+  "type": "object",
+  "additionalProperties": false,
+  "components": {
+    "resource_field": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ResourceField",
+      "description": "Schema for the resource field object.",
+      "type": "string"
+    },
+    "compare_value": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Compare",
+      "description": "Schema for the compare object",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "arr_compare": {
+      "type": "array",
+      "additionalItems": false,
+      "minItems": 2,
+      "items": [
+        {
+          "$ref": "#/components/resource_field"
+        },
+        {
+          "$ref": "#/components/compare_value"
+        }
+      ]
+    }
+  },
+  "anyOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Check if the value is equal",
+      "required": ["equal"],
+      "properties": {
+        "equal": {
+          "$ref": "#/components/arr_compare"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Check if the value is greater than",
+      "required": ["greaterThan"],
+      "properties": {
+        "greaterThan": {
+          "$ref": "#/components/arr_compare"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Check if the value is less than",
+      "required": ["lessThan"],
+      "properties": {
+        "lessThan": {
+          "$ref": "#/components/arr_compare"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Check if the value is greater than or equal",
+      "required": ["greaterThanOrEqual"],
+      "properties": {
+        "greaterThanOrEqual": {
+          "$ref": "#/components/arr_compare"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Check if the value is less than or equal",
+      "required": ["lessThanOrEqual"],
+      "properties": {
+        "lessThanOrEqual": {
+          "$ref": "#/components/arr_compare"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Check if the value is not equal",
+      "required": ["not"],
+      "properties": {
+        "not": {
+          "$ref": "#"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Check if all conditions are true",
+      "required": ["and"],
+      "properties": {
+        "and": {
+          "type": "array",
+          "items": {
+            "$ref": "#"
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Check if at least one condition is true",
+      "required": ["or"],
+      "properties": {
+        "or": {
+          "type": "array",
+          "items": {
+            "$ref": "#"
+          }
+        }
+      }
+    }
+  ]
+}

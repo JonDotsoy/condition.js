@@ -3,30 +3,23 @@
 }
 
 .inputWithType {
-  @apply
-    grid
-    grid-cols-[auto_1fr]
-  ;
+  @apply grid
+    grid-cols-[auto_1fr];
 
-  select, input {
-    @apply
-      border-y
+  select,
+  input {
+    @apply border-y
       border-gray-300
       px-2
-      py-1
-    ;
+      py-1;
   }
-  
+
   select {
-    @apply
-      border-l
-      rounded-l
-    ;
+    @apply border-l
+      rounded-l;
   }
   input {
-    @apply
-      border-r
-      rounded-r
-    ;
+    @apply border-r
+      rounded-r;
   }
 }

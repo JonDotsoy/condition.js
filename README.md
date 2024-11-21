@@ -1,6 +1,6 @@
 # condition.js
 
-Conditions for JSON
+Conditions for JSON. Receive conditions from outside.
 
 **Expressions:**
 

@@ -1,5 +1,6 @@
 import { get } from "@jondotsoy/utils-js/get";
 import type { ConditionDTO } from "./condition.dto.js";
+export type { ConditionDTO } from "./condition.dto.js";
 
 const split = (value: string, delimiter: string) => {
   return value.split(delimiter);
