@@ -1,0 +1,49 @@
+name: Bun Release Package
+
+on:
+  workflow_call:
+    secrets:
+      NPM_TOKEN:
+        required: true
+        description: NPM Token to publish package
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release-please.outputs.release_created }}
+    steps:
+      - name: release
+        id: release-please
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  delivery-npm:
+    runs-on: ubuntu-latest
+    # if: needs.release-please.outputs.release_created
+    needs:
+      - release-please
+    environment:
+        name: npm_latest
+        url: ${{ steps.generate_page_url.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v4
+        with:
+          registry-url: "https://registry.npmjs.org"
+          cache: |
+            npm
+      # - run: bun install
+      # - run: npm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - id: generate_page_url
+        run: |
+          pkg_name=$(cat package.json | jq '.name')
+          pkg_version=$(cat package.json | jq '.version')
+          echo "page_url=https://www.npmjs.com/package/${pkg_name}/v/${pkg_version}" > "$GITHUB_OUTPUT"
