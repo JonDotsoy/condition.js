@@ -43,5 +43,11 @@
   },
   "bugs": {
     "url": "https://github.com/jondotsoy/condition.js/issues"
-  }
+  },
+  "keywords": [
+    "json",
+    "schema",
+    "condition",
+    "validation"
+  ]
 }
