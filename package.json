@@ -32,6 +32,7 @@
   "dependencies": {
     "@jondotsoy/utils-js": "^0.5.2"
   },
+  "license": "MIT",
   "files": [
     "lib",
     "condition.schema.json"
