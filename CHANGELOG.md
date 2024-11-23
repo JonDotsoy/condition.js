@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/JonDotsoy/condition.js/compare/condition-v0.2.0...condition-v0.2.1) (2024-11-23)
+
+
+### Bug Fixes
+
+* remove unused dependency ([0fe6328](https://github.com/JonDotsoy/condition.js/commit/0fe6328ffe7bf396365448aa9633c026f0010149))
+
 ## [0.2.0](https://github.com/JonDotsoy/condition.js/compare/condition-v0.1.3...condition-v0.2.0) (2024-11-23)
 
 
