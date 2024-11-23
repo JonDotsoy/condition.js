@@ -24,11 +24,11 @@ jobs:
 
   delivery-npm:
     runs-on: ubuntu-latest
-    # if: needs.release-please.outputs.release_created
+    if: needs.release-please.outputs.release_created
     needs:
       - release-please
     environment:
-        name: npm_latest
+        name: npm
         url: ${{ steps.generate_page_url.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
@@ -36,10 +36,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           registry-url: "https://registry.npmjs.org"
-      # - run: bun install
-      # - run: npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: bun install
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - id: generate_page_url
         run: |
           pkg_name=$(cat package.json | jq '.name' -r)
