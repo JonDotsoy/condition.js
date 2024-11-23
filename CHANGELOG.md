@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/JonDotsoy/condition.js/compare/condition-v0.2.1...condition-v0.2.2) (2024-11-23)
+
+
+### Miscellaneous Chores
+
+* release 0.2.2 ([aeb3878](https://github.com/JonDotsoy/condition.js/commit/aeb38789ef08f3fb171dfe869e4768c892e14d97))
+
 ## [0.2.1](https://github.com/JonDotsoy/condition.js/compare/condition-v0.2.0...condition-v0.2.1) (2024-11-23)
 
 
