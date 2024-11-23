@@ -1,15 +1,15 @@
 name: Release @jondotsoy/condition
 
 on:
-    push:
-        branches:
-            - develop
+  push:
+    branches:
+      - develop
 
 jobs:
-    release:
-        uses: jondotsoy/jondotsoy/.github/workflows/bun-release-package.yml@v1
-        permissions:
-            contents: write
-            pull-requests: write
-        secrets:
-            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  release:
+    uses: jondotsoy/jondotsoy/.github/workflows/bun-release-package.yml@v1
+    permissions:
+      contents: write
+      pull-requests: write
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
