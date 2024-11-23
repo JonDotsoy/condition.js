@@ -35,5 +35,12 @@
   "files": [
     "lib",
     "condition.schema.json"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jondotsoy/condition.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jondotsoy/condition.js/issues"
+  }
 }
