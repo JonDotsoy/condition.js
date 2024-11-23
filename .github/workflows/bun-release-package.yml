@@ -42,6 +42,6 @@ jobs:
       #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - id: generate_page_url
         run: |
-          pkg_name=$(cat package.json | jq '.name')
-          pkg_version=$(cat package.json | jq '.version')
+          pkg_name=$(cat package.json | jq '.name' -r)
+          pkg_version=$(cat package.json | jq '.version' -r)
           echo "page_url=https://www.npmjs.com/package/${pkg_name}/v/${pkg_version}" > "$GITHUB_OUTPUT"
