@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - develop
+    paths:
+      - packages/page/**
+      - .github/workflows/release-page.yml
 
 permissions:
   contents: read
